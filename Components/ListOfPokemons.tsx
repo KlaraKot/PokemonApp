@@ -19,7 +19,7 @@ export const ListOfPokemons = () => {
   }, []);
 
   return (
-    <Box bg="#fff" alignItems="center" justifyContent="center">
+    <Box>
       <Text>Moje pokemony</Text>
       <FlatList
         data={listOfPokemons}
