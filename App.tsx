@@ -1,17 +1,5 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, SafeAreaView } from "react-native";
-import React, { Component } from "react";
-import { ListOfPokemons } from "./Components/ListOfPokemons";
-import { NativeBaseProvider, Text, Box } from "native-base";
+import React from "react";
+import { MyStack } from "./Components/Stack";
 
-const App = () => {
-  return (
-    <NativeBaseProvider>
-      <SafeAreaView>
-        <ListOfPokemons />
-      </SafeAreaView>
-    </NativeBaseProvider>
-  );
-};
-
+const App = () => <MyStack />;
 export default App;

@@ -1,16 +1,16 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, SafeAreaView, FlatList } from "react-native";
-import React, { Component, useEffect, useState } from "react";
+import { FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
 import { ItemList } from "./ItemList";
-import { NativeBaseProvider, Text, Box } from "native-base";
+import { Text, Box } from "native-base";
 
 export const ListOfPokemons = () => {
   const [listOfPokemons, setListOfPOkemons] = useState<Array<{ name: string }>>(
-    []
+    [],
   );
 
   useEffect(() => {
     const getPokemons = async () => {
+      // await new Promise((res) => setTimeout(res, 1000));
       const response = await fetch("https://pokeapi.co/api/v2/pokemon");
       const list = await response.json();
       setListOfPOkemons(list.results);
@@ -18,11 +18,14 @@ export const ListOfPokemons = () => {
     getPokemons();
   }, []);
 
+  const header = () => <Text>Moje pokemony</Text>;
+
   return (
     <Box>
-      <Text>Moje pokemony</Text>
       <FlatList
+        ListHeaderComponent={header}
         data={listOfPokemons}
+        // ItemSeparatorComponent=
         renderItem={({ item: { name } }) => <ItemList name={name} />}
       />
     </Box>
