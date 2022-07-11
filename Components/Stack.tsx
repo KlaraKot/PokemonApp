@@ -1,33 +1,34 @@
 import * as React from "react";
-import { FavouritePokemon } from "./FavouritePokemon";
+// import { FavouritePokemonView } from "./FavouritePokemonView";
 import { ListOfPokemons } from "./ListOfPokemons";
 import { NativeBaseProvider } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { ListOfFavouritePokemons } from "./ListOfFavouritePokemons";
 
 const Tab = createBottomTabNavigator();
 
 export const MyStack = () => (
   <NativeBaseProvider>
     <NavigationContainer>
-      <Tab.Navigator initialRouteName="Home">
+      <Tab.Navigator>
         <Tab.Screen
           name="List"
           component={ListOfPokemons}
           options={{
             title: "List of pokemons",
             headerStyle: {
-              backgroundColor: "#f4511e",
+              backgroundColor: "#3EB489",
             },
           }}
         />
         <Tab.Screen
           name="Favourite"
-          component={FavouritePokemon}
+          component={ListOfFavouritePokemons}
           options={{
             title: "Favourite pokemon",
             headerStyle: {
-              backgroundColor: "#f4511e",
+              backgroundColor: "#3EB489",
             },
           }}
         />

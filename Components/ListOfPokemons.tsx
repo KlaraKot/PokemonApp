@@ -1,7 +1,8 @@
-import { FlatList } from "react-native";
+import { FlatList, Button } from "react-native";
 import React, { useEffect, useState } from "react";
-import { ItemList } from "./ItemList";
-import { Text, Box } from "native-base";
+import { SinglePokemon } from "./SinglePokemon";
+import { Box } from "native-base";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const ListOfPokemons = () => {
   const [listOfPokemons, setListOfPOkemons] = useState<Array<{ name: string }>>(
@@ -18,15 +19,14 @@ export const ListOfPokemons = () => {
     getPokemons();
   }, []);
 
-  const header = () => <Text>Moje pokemony</Text>;
-
   return (
     <Box>
+      <Button onPress={() => AsyncStorage.clear()} title="no wez wcisnij" />
+
       <FlatList
-        ListHeaderComponent={header}
         data={listOfPokemons}
         // ItemSeparatorComponent=
-        renderItem={({ item: { name } }) => <ItemList name={name} />}
+        renderItem={({ item: { name } }) => <SinglePokemon name={name} />}
       />
     </Box>
   );

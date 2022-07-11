@@ -4,39 +4,48 @@ import { View } from "react-native";
 import { ImageOfPokemon } from "./ImageOfPokemon";
 import { IconButton } from "react-native-paper";
 import {
-  storeFavouritePokemon,
   getFavouritePokemon,
-  removePokemon,
   checkFavouritePokemon,
 } from "../Storage/pokemonStorage";
+import { PokemonContext } from "../Context/context";
 // @ts-ignore
 import blackHeart from "../assets/iconmonstr-favorite-3-240.png";
 // @ts-ignore
 import whiteHeart from "../assets/iconmonstr-heart-thin-240.png";
+import { Pokemon } from "../Types/pokemon";
 
 interface Props {
   name: string;
 }
 
-export const ItemList = ({ name }: Props) => {
-  const [isPressed, setIsPressed] = useState<boolean>(false);
+const convertToPokemonObject = (newName: string) => {
+  const pokemon: Pokemon = {
+    name: newName,
+  };
+  return pokemon;
+};
+
+export const SinglePokemon = ({ name }: Props) => {
+  const [isFavourite, setIsFavourite] = useState<boolean>(false);
+  const { savePokemon, deletePokemon } = React.useContext(PokemonContext);
 
   useEffect(() => {
     const getPokemons = async () => {
       const isPokemonInStorage = await checkFavouritePokemon(name);
-      setIsPressed(isPokemonInStorage);
+      setIsFavourite(isPokemonInStorage);
     };
     getPokemons();
   }, [name]);
 
-  const handleStorage = (action: boolean) => {
+  const handleFavourite = (action: boolean) => {
+    const favouritePokemon = convertToPokemonObject(name);
     if (action === false) {
-      removePokemon(name);
-      setIsPressed(false);
+      deletePokemon(favouritePokemon);
+      setIsFavourite(false);
     } else {
-      storeFavouritePokemon(name);
+      savePokemon(favouritePokemon);
       getFavouritePokemon(name);
-      setIsPressed(true);
+      setIsFavourite(true);
     }
   };
 
@@ -53,28 +62,32 @@ export const ItemList = ({ name }: Props) => {
           borderRadius: 10,
         }}
       >
-        <Text
-          padding="5"
-          fontSize="lg"
-          fontFamily="Cochin"
-          color="black"
-          fontWeight="bold"
+        <View
+          style={{
+            padding: 20,
+          }}
         >
-          {name}
-        </Text>
+          <Text
+            fontSize="lg"
+            fontFamily="Cochin"
+            color="black"
+            fontWeight="bold"
+          >
+            {name}
+          </Text>
+          <IconButton
+            icon={isFavourite ? blackHeart : whiteHeart}
+            size={20}
+            onPress={() => handleFavourite(!isFavourite)}
+          />
+        </View>
+
         <View
           style={{
             paddingTop: 10,
           }}
         >
           <ImageOfPokemon name={name} />
-        </View>
-        <View>
-          <IconButton
-            icon={isPressed ? blackHeart : whiteHeart}
-            size={20}
-            onPress={() => handleStorage(!isPressed)}
-          />
         </View>
       </View>
     </View>

@@ -21,6 +21,7 @@ export const getFavouritePokemon = async (selectedFavouritePokemon: string) => {
       selectedFavouritePokemon,
     );
     if (favouritePokemon !== null) {
+      console.log("elo");
       console.log(favouritePokemon);
       return favouritePokemon;
     }
@@ -46,4 +47,15 @@ export const checkFavouritePokemon = async (pokemon: string) => {
   const info = !!favouritePokemon;
 
   return info;
+};
+
+export const getAllFavouritePokemons = async () => {
+  try {
+    const keys = await AsyncStorage.getAllKeys();
+    // const response = await AsyncStorage.multiGet(keys);
+    return keys;
+  } catch (error) {
+    console.log(error);
+  }
+  return undefined;
 };

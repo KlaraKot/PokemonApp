@@ -1,8 +1,22 @@
-import { View, Text } from "react-native";
 import React from "react";
+import { Box, Text } from "native-base";
 
-export const FavouritePokemon = () => (
-  <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-    <Text>Favourite Pokemon</Text>
-  </View>
-);
+export const FavouritePokemon = () => {
+  const www = "Mamma mia";
+  // zebranie pokemonow z local
+
+  return (
+    <Box
+      style={{
+        justifyContent: "center",
+        height: "100%",
+        marginHorizontal: 20,
+        marginTop: 20,
+        backgroundColor: "#aaf0d1",
+        borderRadius: 10,
+      }}
+    >
+      <Text>{www}</Text>
+    </Box>
+  );
+};
