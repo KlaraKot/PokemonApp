@@ -21,8 +21,6 @@ export const getFavouritePokemon = async (selectedFavouritePokemon: string) => {
       selectedFavouritePokemon,
     );
     if (favouritePokemon !== null) {
-      console.log("elo");
-      console.log(favouritePokemon);
       return favouritePokemon;
     }
   } catch (error) {

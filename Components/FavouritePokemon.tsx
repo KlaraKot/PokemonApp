@@ -1,6 +1,8 @@
 import React from "react";
 import { Box, Text } from "native-base";
 
+// To Do: Implement this component
+
 export const FavouritePokemon = () => {
   const www = "Mamma mia";
   // zebranie pokemonow z local

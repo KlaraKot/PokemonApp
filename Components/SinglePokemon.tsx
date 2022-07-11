@@ -3,10 +3,7 @@ import { Text } from "native-base";
 import { View } from "react-native";
 import { ImageOfPokemon } from "./ImageOfPokemon";
 import { IconButton } from "react-native-paper";
-import {
-  getFavouritePokemon,
-  checkFavouritePokemon,
-} from "../Storage/pokemonStorage";
+import { checkFavouritePokemon } from "../Storage/pokemonStorage";
 import { PokemonContext } from "../Context/context";
 // @ts-ignore
 import blackHeart from "../assets/iconmonstr-favorite-3-240.png";
@@ -44,7 +41,6 @@ export const SinglePokemon = ({ name }: Props) => {
       setIsFavourite(false);
     } else {
       savePokemon(favouritePokemon);
-      getFavouritePokemon(name);
       setIsFavourite(true);
     }
   };

@@ -1,5 +1,5 @@
 import * as React from "react";
-// import { FavouritePokemonView } from "./FavouritePokemonView";
+
 import { ListOfPokemons } from "./ListOfPokemons";
 import { NativeBaseProvider } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";

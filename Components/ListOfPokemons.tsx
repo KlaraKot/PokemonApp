@@ -21,11 +21,11 @@ export const ListOfPokemons = () => {
 
   return (
     <Box>
-      <Button onPress={() => AsyncStorage.clear()} title="no wez wcisnij" />
+      {/* przycisk do usuniecia danych z asyncStorage */}
+      <Button onPress={() => AsyncStorage.clear()} title="kliknij" />
 
       <FlatList
         data={listOfPokemons}
-        // ItemSeparatorComponent=
         renderItem={({ item: { name } }) => <SinglePokemon name={name} />}
       />
     </Box>
