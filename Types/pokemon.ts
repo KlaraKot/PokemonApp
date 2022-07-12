@@ -7,6 +7,8 @@ export type PokemonContextType = {
   // eslint-disable-next-line no-unused-vars
   savePokemon: (name: Pokemon) => void;
   // eslint-disable-next-line no-unused-vars
-  deletePokemon: (name: Pokemon) => void;
+  deletePokemon: (pokemon: Pokemon) => void;
   getAllPokemons: () => Pokemon[];
+  // eslint-disable-next-line no-unused-vars
+  getPokemonByName: (pokemon: Pokemon) => Pokemon;
 };

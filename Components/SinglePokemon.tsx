@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text } from "native-base";
+import { Text, Button } from "native-base";
 import { View } from "react-native";
 import { ImageOfPokemon } from "./ImageOfPokemon";
 import { IconButton } from "react-native-paper";
@@ -10,10 +10,17 @@ import blackHeart from "../assets/iconmonstr-favorite-3-240.png";
 // @ts-ignore
 import whiteHeart from "../assets/iconmonstr-heart-thin-240.png";
 import { Pokemon } from "../Types/pokemon";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import type { StackParamList } from "../Types/StackParams";
 
 interface Props {
   name: string;
 }
+type favouritePokemonProp = StackNavigationProp<
+  StackParamList,
+  "FavouritePokemon"
+>;
 
 const convertToPokemonObject = (newName: string) => {
   const pokemon: Pokemon = {
@@ -25,6 +32,8 @@ const convertToPokemonObject = (newName: string) => {
 export const SinglePokemon = ({ name }: Props) => {
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
   const { savePokemon, deletePokemon } = React.useContext(PokemonContext);
+
+  const navigation = useNavigation<favouritePokemonProp>();
 
   useEffect(() => {
     const getPokemons = async () => {
@@ -76,6 +85,18 @@ export const SinglePokemon = ({ name }: Props) => {
             size={20}
             onPress={() => handleFavourite(!isFavourite)}
           />
+          <Button
+            height={10}
+            width={20}
+            onPress={
+              () =>
+                // eslint-disable-next-line implicit-arrow-linebreak
+                navigation.push("FavouritePokemon", { pokemon: name })
+              // eslint-disable-next-line react/jsx-curly-newline
+            }
+          >
+            Zobacz
+          </Button>
         </View>
 
         <View
