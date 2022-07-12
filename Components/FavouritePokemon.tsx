@@ -1,24 +1,34 @@
 import React from "react";
-import { Box, Text } from "native-base";
+import { View, Box, Text } from "native-base";
+import type { StackParamList } from "../Types/StackParams";
+import { RouteProp, useRoute } from "@react-navigation/native";
+import { FullImageOfPokemon } from "../Components/FullImageOfPokemon";
 
-// To Do: Implement this component
+type favouritePokemonProp = RouteProp<StackParamList, "FavouritePokemon">;
 
 export const FavouritePokemon = () => {
-  const www = "Mamma mia";
-  // zebranie pokemonow z local
-
+  const route = useRoute<favouritePokemonProp>();
   return (
-    <Box
+    <View
       style={{
-        justifyContent: "center",
         height: "100%",
         marginHorizontal: 20,
-        marginTop: 20,
+        marginTop: 10,
         backgroundColor: "#aaf0d1",
         borderRadius: 10,
       }}
     >
-      <Text>{www}</Text>
-    </Box>
+      <Box
+        style={{
+          height: "100%",
+          alignItems: "center",
+        }}
+      >
+        <FullImageOfPokemon name={route.params.pokemon} />
+        <Text fontSize="lg" fontFamily="Cochin" color="black" fontWeight="bold">
+          {route.params.pokemon}
+        </Text>
+      </Box>
+    </View>
   );
 };
