@@ -1,6 +1,6 @@
 import React from "react";
-import { MyStack } from "./Components/Stack";
-import { PokemonProvider } from "./Context/context";
+import { MyStack } from "./Navigator/MyStack";
+import { PokemonProvider } from "./Context/FavouritePokemonContext";
 
 const App = () => (
   <PokemonProvider>

@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { FavouritePokemon } from "./FavouritePokemon";
+import { FavouritePokemon } from "../Screens/FavouritePokemonScreen";
 
 const PokemonStack = createStackNavigator();
 

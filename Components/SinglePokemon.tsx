@@ -4,7 +4,7 @@ import { View } from "react-native";
 import { ImageOfPokemon } from "./ImageOfPokemon";
 import { IconButton } from "react-native-paper";
 import { checkFavouritePokemon } from "../Storage/pokemonStorage";
-import { PokemonContext } from "../Context/context";
+import { PokemonContext } from "../Context/FavouritePokemonContext";
 // @ts-ignore
 import blackHeart from "../assets/iconmonstr-favorite-3-240.png";
 // @ts-ignore
@@ -31,7 +31,12 @@ const convertToPokemonObject = (newName: string) => {
 
 export const SinglePokemon = ({ name }: Props) => {
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
-  const { savePokemon, deletePokemon } = React.useContext(PokemonContext);
+  // eslint-disable-next-line operator-linebreak
+  const {
+    addPokemonToFavourites,
+    deletePokemonFromFavourites,
+    getFavouritePokemonByName,
+  } = React.useContext(PokemonContext);
 
   const navigation = useNavigation<favouritePokemonProp>();
 
@@ -43,14 +48,18 @@ export const SinglePokemon = ({ name }: Props) => {
     getPokemons();
   }, [name]);
 
-  const handleFavourite = (action: boolean) => {
+  const handleFavourite = () => {
     const favouritePokemon = convertToPokemonObject(name);
-    if (action === false) {
-      deletePokemon(favouritePokemon);
-      setIsFavourite(false);
-    } else {
-      savePokemon(favouritePokemon);
+    console.log(favouritePokemon);
+    const foundPokemon = getFavouritePokemonByName(favouritePokemon.name);
+    console.log(foundPokemon);
+    if (foundPokemon === undefined) {
+      addPokemonToFavourites(favouritePokemon);
       setIsFavourite(true);
+    } else {
+      console.log("weszlem");
+      deletePokemonFromFavourites(favouritePokemon);
+      setIsFavourite(false);
     }
   };
 
@@ -83,7 +92,7 @@ export const SinglePokemon = ({ name }: Props) => {
           <IconButton
             icon={isFavourite ? blackHeart : whiteHeart}
             size={20}
-            onPress={() => handleFavourite(!isFavourite)}
+            onPress={() => handleFavourite()}
           />
           <Button
             height={10}
