@@ -7,6 +7,6 @@ export const FullImageOfPokemon = ({ name }: { name: string }) => (
     source={{
       uri: `https://img.pokemondb.net/sprites/omega-ruby-alpha-sapphire/dex/normal/${name}.png`,
     }}
-    key={name}
+    key={JSON.stringify(name)}
   />
 );

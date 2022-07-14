@@ -69,7 +69,7 @@ export const SinglePokemon = (pokemon: Pokemon) => {
             onPress={
               () =>
                 // eslint-disable-next-line implicit-arrow-linebreak
-                navigation.push("FavouritePokemon", { pokemon: name })
+                navigation.push("FavouritePokemon", { pokemon1: pokemon })
               // eslint-disable-next-line react/jsx-curly-newline
             }
           >
