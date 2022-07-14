@@ -2,13 +2,13 @@ export interface Pokemon {
   name: string;
 }
 
-export type PokemonContextType = {
-  listOfPokemonsName: Pokemon[];
+export type FavouritePokemonContextType = {
+  listOfFavouritesPokemonsName: Pokemon[];
   // eslint-disable-next-line no-unused-vars
-  savePokemon: (name: Pokemon) => void;
+  addPokemonToFavourites: (name: Pokemon) => void;
   // eslint-disable-next-line no-unused-vars
-  deletePokemon: (pokemon: Pokemon) => void;
-  getAllPokemons: () => Pokemon[];
+  deletePokemonFromFavourites: (pokemon: Pokemon) => void;
+  getAllFavouritesPokemons: () => Pokemon[];
   // eslint-disable-next-line no-unused-vars
-  getPokemonByName: (pokemon: Pokemon) => Pokemon;
+  getFavouritePokemonByName: (pokemon: Pokemon) => Pokemon;
 };

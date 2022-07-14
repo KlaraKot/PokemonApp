@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "native-base";
-import { PokemonContext } from "../Context/context";
+import { PokemonContext } from "../Context/FavouritePokemonContext";
 import { FlatList } from "react-native";
 import { SinglePokemon } from "./SinglePokemon";
 
 export const ListOfFavouritePokemons = () => {
-  const [listOfPokemons, setListOfPokemons] = useState<Array<{ name: string }>>(
-    [],
-  );
-  const { getAllPokemons } = React.useContext(PokemonContext);
+  const [listOfFavouritesPokemons, setListOfFavouritesPokemons] = useState<
+    ReadonlyArray<{ name: string }>
+  >([]);
+  const { getAllFavouritesPokemons } = React.useContext(PokemonContext);
 
   useEffect(() => {
-    const listOfFavouritesPokemons = getAllPokemons();
-    setListOfPokemons(listOfFavouritesPokemons);
-  }, [listOfPokemons, getAllPokemons]);
+    const list = getAllFavouritesPokemons();
+    setListOfFavouritesPokemons(list);
+  }, [listOfFavouritesPokemons, getAllFavouritesPokemons]);
 
   return (
     <Box>
       <FlatList
-        data={listOfPokemons}
+        data={listOfFavouritesPokemons}
         renderItem={({ item: { name } }) => <SinglePokemon name={name} />}
       />
     </Box>

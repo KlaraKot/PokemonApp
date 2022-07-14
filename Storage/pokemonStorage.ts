@@ -1,4 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Pokemon } from "../Types/pokemon";
 
 // storing favourite pokemon
 
@@ -40,8 +41,8 @@ export const removePokemon = async (pokemon: string) => {
 };
 
 // checking if pokemon is in storage
-export const checkFavouritePokemon = async (pokemon: string) => {
-  const favouritePokemon = await AsyncStorage.getItem(pokemon);
+export const checkFavouritePokemon = async (pokemon: Pokemon) => {
+  const favouritePokemon = await AsyncStorage.getItem(pokemon.name);
   const info = !!favouritePokemon;
 
   return info;
