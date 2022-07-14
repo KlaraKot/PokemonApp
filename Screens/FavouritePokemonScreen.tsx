@@ -3,12 +3,15 @@ import { View, Box, Text } from "native-base";
 import type { StackParamList } from "../Types/StackParams";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { FullImageOfPokemon } from "../Components/FullImageOfPokemon";
-import { PokemonStatisticInformations } from "../Components/PokemonStatisticInformations";
+// import { PokemonStatisticInformations } from "../Components/PokemonStatisticInformations";
+import { PokemonStatisticApi } from "../Api/pokemonStatisticApi";
 
 type favouritePokemonProp = RouteProp<StackParamList, "FavouritePokemon">;
 
 export const FavouritePokemon = () => {
   const route = useRoute<favouritePokemonProp>();
+  const { name } = route.params.pokemon1;
+  PokemonStatisticApi(route.params.pokemon1);
   return (
     <View
       style={{
@@ -25,16 +28,17 @@ export const FavouritePokemon = () => {
           alignItems: "center",
         }}
       >
-        <FullImageOfPokemon name={route.params.pokemon} />
+        <FullImageOfPokemon name={name} />
         <Text
           fontSize="3xl"
           fontFamily="Cochin"
           color="black"
           fontWeight="bold"
         >
-          {route.params.pokemon}
+          {name}
+          olaboga
         </Text>
-        <PokemonStatisticInformations name={route.params.pokemon} />
+        {/* <PokemonStatisticInformations name={route.params.pokemon1} /> */}
       </Box>
     </View>
   );
