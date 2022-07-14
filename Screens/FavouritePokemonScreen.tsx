@@ -1,17 +1,27 @@
-import React from "react";
-import { View, Box, Text } from "native-base";
+import React, { useState } from "react";
+// eslint-disable-next-line object-curly-newline
+import { View, Box, Text, Button } from "native-base";
 import type { StackParamList } from "../Types/StackParams";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { ImageOfPokemon } from "../Components/ImageOfPokemon";
-import { PokemonStatisticApi } from "../Api/pokemonStatisticApi";
+import { PokemonAbilitiesApi } from "../Api/pokemonAbilitiesApi";
+import Modal from "react-native-modal";
 
 type favouritePokemonProp = RouteProp<StackParamList, "FavouritePokemon">;
 
 export const FavouritePokemon = () => {
   const fullImage = true;
   const route = useRoute<favouritePokemonProp>();
-  const { name } = route.params.pokemon1;
-  const { maslana } = PokemonStatisticApi(route.params.pokemon1);
+  const { name } = route.params.favouritePokemon;
+  const { pokemonAbilities } = PokemonAbilitiesApi(
+    route.params.favouritePokemon,
+  );
+  const [isVisible, setVisible] = useState<boolean>(false);
+
+  const toggleModal = () => {
+    setVisible(!isVisible);
+  };
+
   return (
     <View
       style={{
@@ -37,33 +47,49 @@ export const FavouritePokemon = () => {
         >
           {name}
         </Text>
-        {/* wrzucic tu kwadracik z bardziej mietowym kolorem  */}
-        <View
-          style={{
-            marginTop: 10,
-            backgroundColor: "#D2E5D0",
-            borderRadius: 10,
-            marginBottom: 10,
-            height: 150,
-            width: 150,
-            alignItems: "center",
-          }}
-        >
+        <Button onPress={toggleModal}>Click!</Button>
+        <Modal isVisible={isVisible} backdropColor="#F8AFA6">
           <View
             style={{
-              padding: 20,
+              backgroundColor: "#F79489",
+              borderRadius: 10,
+
+              padding: 50,
+              alignItems: "center",
             }}
           >
-            <Text fontSize="2xl" fontFamily="Cochin" color="black">
-              Abilities:
-            </Text>
-            {maslana.map((item) => (
-              <Text fontSize="xl" fontFamily="Cochin" key={item.ability.name}>
-                {item.ability.name}
+            <View
+              style={{
+                padding: 20,
+              }}
+            >
+              <Text
+                fontSize="2xl"
+                fontFamily="Cochin"
+                color="black"
+                fontWeight="bold"
+              >
+                Abilities:
               </Text>
-            ))}
+              {pokemonAbilities.map((ability) => (
+                <Text
+                  fontSize="xl"
+                  fontFamily="Cochin"
+                  key={ability.ability.name}
+                >
+                  {ability.ability.name}
+                </Text>
+              ))}
+            </View>
+            <Button
+              color="#000000"
+              backgroundColor="#FADCD9"
+              onPress={toggleModal}
+            >
+              close
+            </Button>
           </View>
-        </View>
+        </Modal>
       </Box>
     </View>
   );
