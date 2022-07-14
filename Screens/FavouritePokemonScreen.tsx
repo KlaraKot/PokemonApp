@@ -3,7 +3,6 @@ import { View, Box, Text } from "native-base";
 import type { StackParamList } from "../Types/StackParams";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { FullImageOfPokemon } from "../Components/FullImageOfPokemon";
-// import { PokemonStatisticInformations } from "../Components/PokemonStatisticInformations";
 import { PokemonStatisticApi } from "../Api/pokemonStatisticApi";
 
 type favouritePokemonProp = RouteProp<StackParamList, "FavouritePokemon">;
@@ -11,7 +10,7 @@ type favouritePokemonProp = RouteProp<StackParamList, "FavouritePokemon">;
 export const FavouritePokemon = () => {
   const route = useRoute<favouritePokemonProp>();
   const { name } = route.params.pokemon1;
-  PokemonStatisticApi(route.params.pokemon1);
+  const { maslana } = PokemonStatisticApi(route.params.pokemon1);
   return (
     <View
       style={{
@@ -36,9 +35,34 @@ export const FavouritePokemon = () => {
           fontWeight="bold"
         >
           {name}
-          olaboga
         </Text>
-        {/* <PokemonStatisticInformations name={route.params.pokemon1} /> */}
+        {/* wrzucic tu kwadracik z bardziej mietowym kolorem  */}
+        <View
+          style={{
+            marginTop: 10,
+            backgroundColor: "#D2E5D0",
+            borderRadius: 10,
+            marginBottom: 10,
+            height: 150,
+            width: 150,
+            alignItems: "center",
+          }}
+        >
+          <View
+            style={{
+              padding: 20,
+            }}
+          >
+            <Text fontSize="2xl" fontFamily="Cochin" color="black">
+              Abilities:
+            </Text>
+            {maslana.map((item) => (
+              <Text fontSize="xl" fontFamily="Cochin" key={item.ability.name}>
+                {item.ability.name}
+              </Text>
+            ))}
+          </View>
+        </View>
       </Box>
     </View>
   );
