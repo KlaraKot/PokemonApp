@@ -32,6 +32,8 @@ export const SinglePokemon = (pokemon: Pokemon) => {
 
   const { name } = pokemon;
 
+  const fullImage = false;
+
   useEffect(() => {
     const getPokemons = async () => {
       const isPokemonInStorage = await checkFavouritePokemon(pokemon);
@@ -101,7 +103,7 @@ export const SinglePokemon = (pokemon: Pokemon) => {
             paddingTop: 10,
           }}
         >
-          <ImageOfPokemon name={name} />
+          <ImageOfPokemon name={name} isFullImage={fullImage} />
         </View>
       </View>
     </View>
