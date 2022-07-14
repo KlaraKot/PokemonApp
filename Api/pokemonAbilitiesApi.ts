@@ -11,8 +11,8 @@ interface Stat {
   };
 }
 
-export const PokemonStatisticApi = (pokemon: Pokemon) => {
-  const [listOfStatistics, setListOfStatistics] = useState<Array<Stat>>([]);
+export const PokemonAbilitiesApi = (pokemon: Pokemon) => {
+  const [listOfAbilities, setListOfAbilities] = useState<Array<Stat>>([]);
   // sciagamy dane z api
   useEffect(() => {
     const getPokemons = async () => {
@@ -20,7 +20,7 @@ export const PokemonStatisticApi = (pokemon: Pokemon) => {
         `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`,
       );
       const list = await response.json();
-      setListOfStatistics(list.abilities);
+      setListOfAbilities(list.abilities);
     };
     getPokemons();
   }, [pokemon.name]);
@@ -28,7 +28,7 @@ export const PokemonStatisticApi = (pokemon: Pokemon) => {
   // obrabianie danych
 
   return {
-    maslana: listOfStatistics,
+    pokemonAbilities: listOfAbilities,
   };
 };
 =======
