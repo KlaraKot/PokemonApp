@@ -14,22 +14,12 @@ import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import type { StackParamList } from "../Types/StackParams";
 
-interface Props {
-  name: string;
-}
 type favouritePokemonProp = StackNavigationProp<
   StackParamList,
   "FavouritePokemon"
 >;
 
-const convertToPokemonObject = (newName: string) => {
-  const pokemon: Pokemon = {
-    name: newName,
-  };
-  return pokemon;
-};
-
-export const SinglePokemon = ({ name }: Props) => {
+export const SinglePokemon = (pokemon: Pokemon) => {
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
   // eslint-disable-next-line operator-linebreak
   const {
@@ -40,25 +30,23 @@ export const SinglePokemon = ({ name }: Props) => {
 
   const navigation = useNavigation<favouritePokemonProp>();
 
+  const { name } = pokemon;
+
   useEffect(() => {
     const getPokemons = async () => {
-      const isPokemonInStorage = await checkFavouritePokemon(name);
+      const isPokemonInStorage = await checkFavouritePokemon(pokemon);
       setIsFavourite(isPokemonInStorage);
     };
     getPokemons();
-  }, [name]);
+  }, [pokemon]);
 
   const handleFavourite = () => {
-    const favouritePokemon = convertToPokemonObject(name);
-    console.log(favouritePokemon);
-    const foundPokemon = getFavouritePokemonByName(favouritePokemon.name);
-    console.log(foundPokemon);
+    const foundPokemon = getFavouritePokemonByName(pokemon);
     if (foundPokemon === undefined) {
-      addPokemonToFavourites(favouritePokemon);
+      addPokemonToFavourites(pokemon);
       setIsFavourite(true);
     } else {
-      console.log("weszlem");
-      deletePokemonFromFavourites(favouritePokemon);
+      deletePokemonFromFavourites(pokemon);
       setIsFavourite(false);
     }
   };

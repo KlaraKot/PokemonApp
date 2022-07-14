@@ -6,11 +6,16 @@ import {
   removePokemon,
 } from "../Storage/pokemonStorage";
 
+const emptyPokemonObject = {
+  name: "",
+};
+
 const initialiValue: FavouritePokemonContextType = {
   listOfFavouritesPokemonsName: [],
   addPokemonToFavourites: () => null,
   deletePokemonFromFavourites: () => null,
   getAllFavouritesPokemons: () => [],
+  getFavouritePokemonByName: () => emptyPokemonObject,
 };
 
 // eslint-disable-next-line operator-linebreak
@@ -19,7 +24,7 @@ export const PokemonContext =
 
 export const PokemonProvider: React.FC = ({ children }) => {
   const [listOfFavouritesPokemonsName, setListOfFavouritesPokemonsNames] =
-    useState<ReadonlyArray<Pokemon>>([]);
+    useState<Array<Pokemon>>([]);
 
   const addPokemonToFavourites = useCallback(
     (favouritePokemon: Pokemon) => {
@@ -61,9 +66,9 @@ export const PokemonProvider: React.FC = ({ children }) => {
   );
 
   const getFavouritePokemonByName = useCallback(
-    (name: string) => {
+    (sx: Pokemon) => {
       const pokemonToReturn = listOfFavouritesPokemonsName.find(
-        (pokemon) => pokemon.name === name,
+        (pokemon) => pokemon.name === sx.name,
       );
       console.log(pokemonToReturn);
       return pokemonToReturn;
