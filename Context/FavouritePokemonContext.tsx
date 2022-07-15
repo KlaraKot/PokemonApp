@@ -90,7 +90,9 @@ export const PokemonProvider: React.FC = ({ children }) => {
     list.then((result) => {
       // blad - Argument of type 'readonly string[] | undefined'
       // is not assignable to parameter of type 'string'.
-      const asdf: Pokemon = convertToPokemonObject(result);
+
+      const ix = [];
+      ix.push(result);
     });
   }, []);
 
