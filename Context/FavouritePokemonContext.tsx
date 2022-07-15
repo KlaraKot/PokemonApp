@@ -4,7 +4,15 @@ import type { FavouritePokemonContextType } from "../Types/pokemon";
 import {
   storeFavouritePokemon,
   removePokemon,
+  getAllFavouritePokemonsFromStorage,
 } from "../Storage/pokemonStorage";
+
+const convertToPokemonObject = (nameToPut: string) => {
+  const asdf: Pokemon = {
+    name: nameToPut,
+  };
+  return asdf;
+};
 
 const emptyPokemonObject = {
   name: "",
@@ -23,6 +31,7 @@ export const PokemonContext =
   React.createContext<FavouritePokemonContextType>(initialiValue);
 
 export const PokemonProvider: React.FC = ({ children }) => {
+  // eslint-disable-next-line operator-linebreak
   const [listOfFavouritesPokemonsName, setListOfFavouritesPokemonsNames] =
     useState<Array<Pokemon>>([]);
 
@@ -76,10 +85,12 @@ export const PokemonProvider: React.FC = ({ children }) => {
     [listOfFavouritesPokemonsName],
   );
 
-  const getAllFavouritesPokemons = useCallback(
-    () => listOfFavouritesPokemonsName,
-    [listOfFavouritesPokemonsName],
-  );
+  const getAllFavouritesPokemons = useCallback(() => {
+    const list = getAllFavouritePokemonsFromStorage();
+    list.then((result) => {
+      const asdf: Pokemon = convertToPokemonObject(result);
+    });
+  }, []);
 
   const foo = useMemo(
     () => ({

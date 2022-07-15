@@ -42,12 +42,13 @@ export const SinglePokemon = (pokemon: Pokemon) => {
 
   const handleFavourite = () => {
     const foundPokemon = getFavouritePokemonByName(pokemon);
+    console.log(foundPokemon);
     if (foundPokemon === undefined) {
       addPokemonToFavourites(pokemon);
       setIsFavourite(true);
     } else {
-      deletePokemonFromFavourites(pokemon);
       setIsFavourite(false);
+      deletePokemonFromFavourites(pokemon);
     }
   };
 

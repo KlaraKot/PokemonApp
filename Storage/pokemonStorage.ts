@@ -1,8 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Pokemon } from "../Types/pokemon";
 
-// storing favourite pokemon
-
 export const storeFavouritePokemon = async (favouritePokemon: string) => {
   try {
     await AsyncStorage.setItem(
@@ -48,10 +46,12 @@ export const checkFavouritePokemon = async (pokemon: Pokemon) => {
   return info;
 };
 
-export const getAllFavouritePokemons = async () => {
+export const getAllFavouritePokemonsFromStorage = async () => {
   try {
     const keys = await AsyncStorage.getAllKeys();
-    // const response = await AsyncStorage.multiGet(keys);
+    // const info = [];
+    // Promise.all([keys]).then((values) => info.push(values));
+
     return keys;
   } catch (error) {
     console.log(error);
