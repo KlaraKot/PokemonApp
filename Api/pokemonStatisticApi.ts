@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // pokemonStatisticApi sciaga wiecej informacji o zadanym pokemonie
 
 import type { Pokemon } from "../Types/pokemon";
@@ -19,3 +20,6 @@ export const PokemonStatisticApi = (pokemon: Pokemon) => {
     getPokemons();
   }, []);
 };
+=======
+export const pokemonStatisticApi = () => {};
+>>>>>>> 38bafb8 (zmiana w wygladzie widoku glownego pokemona)
