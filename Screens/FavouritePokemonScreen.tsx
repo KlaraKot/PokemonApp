@@ -2,12 +2,13 @@ import React from "react";
 import { View, Box, Text } from "native-base";
 import type { StackParamList } from "../Types/StackParams";
 import { RouteProp, useRoute } from "@react-navigation/native";
-import { FullImageOfPokemon } from "../Components/FullImageOfPokemon";
+import { ImageOfPokemon } from "../Components/ImageOfPokemon";
 import { PokemonStatisticApi } from "../Api/pokemonStatisticApi";
 
 type favouritePokemonProp = RouteProp<StackParamList, "FavouritePokemon">;
 
 export const FavouritePokemon = () => {
+  const fullImage = true;
   const route = useRoute<favouritePokemonProp>();
   const { name } = route.params.pokemon1;
   const { maslana } = PokemonStatisticApi(route.params.pokemon1);
@@ -27,7 +28,7 @@ export const FavouritePokemon = () => {
           alignItems: "center",
         }}
       >
-        <FullImageOfPokemon name={name} />
+        <ImageOfPokemon name={name} isFullImage={fullImage} />
         <Text
           fontSize="3xl"
           fontFamily="Cochin"
