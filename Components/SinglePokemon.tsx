@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Text, Button } from "native-base";
 import { View } from "react-native";
 import { ImageOfPokemon } from "./ImageOfPokemon";
 import { IconButton } from "react-native-paper";
-import { checkFavouritePokemon } from "../Storage/pokemonStorage";
 import { PokemonContext } from "../Context/FavouritePokemonContext";
 // @ts-ignore
 import blackHeart from "../assets/iconmonstr-favorite-3-240.png";
@@ -22,33 +21,15 @@ type favouritePokemonProp = StackNavigationProp<
 export const SinglePokemon = (pokemon: Pokemon) => {
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
   // eslint-disable-next-line operator-linebreak
-  const {
-    addPokemonToFavourites,
-    deletePokemonFromFavourites,
-    getFavouritePokemonByName,
-  } = React.useContext(PokemonContext);
+  const { togglePokemonContext } = React.useContext(PokemonContext);
 
   const navigation = useNavigation<favouritePokemonProp>();
 
   const { name } = pokemon;
 
-  useEffect(() => {
-    const getPokemons = async () => {
-      const isPokemonInStorage = await checkFavouritePokemon(pokemon);
-      setIsFavourite(isPokemonInStorage);
-    };
-    getPokemons();
-  }, [pokemon]);
-
-  const handleFavourite = () => {
-    const foundPokemon = getFavouritePokemonByName(pokemon);
-    if (foundPokemon === undefined) {
-      addPokemonToFavourites(pokemon);
-      setIsFavourite(true);
-    } else {
-      deletePokemonFromFavourites(pokemon);
-      setIsFavourite(false);
-    }
+  const handleFavourite = (actionType: boolean) => {
+    togglePokemonContext(pokemon, actionType);
+    setIsFavourite(actionType);
   };
 
   return (
@@ -80,7 +61,7 @@ export const SinglePokemon = (pokemon: Pokemon) => {
           <IconButton
             icon={isFavourite ? blackHeart : whiteHeart}
             size={20}
-            onPress={() => handleFavourite()}
+            onPress={() => handleFavourite(!isFavourite)}
           />
           <Button
             height={10}
