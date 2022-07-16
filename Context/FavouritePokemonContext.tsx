@@ -40,10 +40,10 @@ export const PokemonProvider: React.FC = ({ children }) => {
           console.log("this pokemon already exists!");
         }
       } else {
-        const newListOfPokemons = listOfFavouritesPokemonsName.filter(
+        listOfFavouritesPokemonsName.filter(
           (pokemon) => pokemon.name !== favouritePokemon.name,
         );
-        setListOfFavouritesPokemonsNames([...newListOfPokemons]);
+        setListOfFavouritesPokemonsNames([...listOfFavouritesPokemonsName]);
       }
     },
     [listOfFavouritesPokemonsName],
