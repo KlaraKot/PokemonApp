@@ -10,7 +10,6 @@ import Modal from "react-native-modal";
 type favouritePokemonProp = RouteProp<StackParamList, "FavouritePokemon">;
 
 export const FavouritePokemon = () => {
-  const fullImage = true;
   const route = useRoute<favouritePokemonProp>();
   const { name } = route.params.favouritePokemon;
   const { pokemonAbilities } = usePokemonAbilitiesApi(
