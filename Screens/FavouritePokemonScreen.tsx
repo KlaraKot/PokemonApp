@@ -4,16 +4,15 @@ import { View, Box, Text, Button } from "native-base";
 import type { StackParamList } from "../Types/StackParams";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { ImageOfPokemon } from "../Components/ImageOfPokemon";
-import { PokemonAbilitiesApi } from "../Api/pokemonAbilitiesApi";
+import { usePokemonAbilitiesApi } from "../Api/pokemonAbilitiesApi";
 import Modal from "react-native-modal";
 
 type favouritePokemonProp = RouteProp<StackParamList, "FavouritePokemon">;
 
 export const FavouritePokemon = () => {
-  const fullImage = true;
   const route = useRoute<favouritePokemonProp>();
   const { name } = route.params.favouritePokemon;
-  const { pokemonAbilities } = PokemonAbilitiesApi(
+  const { pokemonAbilities } = usePokemonAbilitiesApi(
     route.params.favouritePokemon,
   );
   const [isVisible, setVisible] = useState<boolean>(false);
@@ -38,7 +37,7 @@ export const FavouritePokemon = () => {
           alignItems: "center",
         }}
       >
-        <ImageOfPokemon name={name} isFullImage={fullImage} />
+        <ImageOfPokemon name={name} isFullImage />
         <Text
           fontSize="3xl"
           fontFamily="Cochin"
@@ -71,7 +70,7 @@ export const FavouritePokemon = () => {
               >
                 Abilities:
               </Text>
-              {pokemonAbilities.map((ability) => (
+              {pokemonAbilities?.map((ability) => (
                 <Text
                   fontSize="xl"
                   fontFamily="Cochin"

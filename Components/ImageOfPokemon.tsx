@@ -1,13 +1,12 @@
 import React from "react";
 import { Image } from "react-native";
 
-export const ImageOfPokemon = ({
-  name,
-  isFullImage,
-}: {
+interface ImageOfPokemonProps {
   name: string;
   isFullImage: boolean;
-}) => (
+}
+
+export const ImageOfPokemon = ({ name, isFullImage }: ImageOfPokemonProps) => (
   <Image
     style={
       isFullImage

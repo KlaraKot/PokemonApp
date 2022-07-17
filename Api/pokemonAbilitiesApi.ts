@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // pokemonStatisticApi sciaga wiecej informacji o zadanym pokemonie
 
 import type { Pokemon } from "../Types/pokemon";
@@ -11,8 +10,8 @@ interface Stat {
   };
 }
 
-export const PokemonAbilitiesApi = (pokemon: Pokemon) => {
-  const [listOfAbilities, setListOfAbilities] = useState<Array<Stat>>([]);
+export const usePokemonAbilitiesApi = (pokemon: Pokemon) => {
+  const [listOfAbilities, setListOfAbilities] = useState<Array<Stat>>();
   // sciagamy dane z api
   useEffect(() => {
     const getPokemons = async () => {
@@ -31,6 +30,3 @@ export const PokemonAbilitiesApi = (pokemon: Pokemon) => {
     pokemonAbilities: listOfAbilities,
   };
 };
-=======
-export const pokemonStatisticApi = () => {};
->>>>>>> 38bafb8 (zmiana w wygladzie widoku glownego pokemona)

@@ -84,7 +84,7 @@ export const SinglePokemon = (pokemon: Pokemon) => {
             paddingTop: 10,
           }}
         >
-          <ImageOfPokemon name={name} isFullImage={fullImage} />
+          <ImageOfPokemon name={name} isFullImage={false} />
         </View>
       </View>
     </View>
