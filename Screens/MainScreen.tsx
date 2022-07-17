@@ -2,6 +2,7 @@ import React from "react";
 import { ListOfPokemons } from "../Components/ListOfPokemons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ListOfFavouritePokemons } from "../Components/ListOfFavouritePokemons";
+import { Map } from "../Components/Map";
 
 const Tab = createBottomTabNavigator();
 
@@ -12,5 +13,6 @@ export const MainScreen = () => (
       name="ListOfFavouritePokemons"
       component={ListOfFavouritePokemons}
     />
+    <Tab.Screen name="Map" component={Map} />
   </Tab.Navigator>
 );
