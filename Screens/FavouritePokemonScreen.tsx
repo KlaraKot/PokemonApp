@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 // eslint-disable-next-line object-curly-newline
 import { View, Box, Text, Button } from "native-base";
+import { ScrollView } from "react-native";
 import type { StackParamList } from "../Types/StackParams";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { ImageOfPokemon } from "../Components/ImageOfPokemon";
+import { usePokemonMovesApi } from "../Api/pokemonMovesApi";
 import { usePokemonAbilitiesApi } from "../Api/pokemonAbilitiesApi";
 import Modal from "react-native-modal";
 
@@ -15,6 +17,8 @@ export const FavouritePokemon = () => {
   const { pokemonAbilities } = usePokemonAbilitiesApi(
     route.params.favouritePokemon,
   );
+  const { pokemonMoves } = usePokemonMovesApi(route.params.favouritePokemon);
+
   const [isVisible, setVisible] = useState<boolean>(false);
 
   const toggleModal = () => {
@@ -38,15 +42,36 @@ export const FavouritePokemon = () => {
         }}
       >
         <ImageOfPokemon name={name} isFullImage />
-        <Text
-          fontSize="3xl"
-          fontFamily="Cochin"
-          color="black"
-          fontWeight="bold"
+        <View style={{ alignItems: "center", marginTop: -50 }}>
+          <Text
+            fontSize="3xl"
+            fontFamily="Cochin"
+            color="black"
+            fontWeight="bold"
+          >
+            {name}
+          </Text>
+        </View>
+        <View
+          style={{
+            height: 100,
+            width: 200,
+            marginTop: 20,
+            backgroundColor: "#9EDEC6",
+            borderRadius: 20,
+          }}
         >
-          {name}
-        </Text>
-        <Button onPress={toggleModal}>Click!</Button>
+          <ScrollView style={{ alignSelf: "center" }}>
+            {pokemonMoves?.map((ability) => (
+              <Text fontSize="xl" fontFamily="Cochin" key={ability.move.name}>
+                {ability.move.name}
+              </Text>
+            ))}
+          </ScrollView>
+        </View>
+        <View style={{ marginTop: 50 }}>
+          <Button onPress={toggleModal}>Click!</Button>
+        </View>
         <Modal isVisible={isVisible} backdropColor="#F8AFA6">
           <View
             style={{
