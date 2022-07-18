@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, Button } from "native-base";
 import { View } from "react-native";
 import { ImageOfPokemon } from "./ImageOfPokemon";
@@ -20,16 +20,24 @@ type favouritePokemonProp = StackNavigationProp<
 
 export const SinglePokemon = (pokemon: Pokemon) => {
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
+  const [action, setAction] = useState<boolean>();
+
   // eslint-disable-next-line operator-linebreak
-  const { togglePokemonContext } = React.useContext(PokemonContext);
+  const { togglePokemonContext, isPokemonInStorage } =
+    React.useContext(PokemonContext);
 
   const navigation = useNavigation<favouritePokemonProp>();
 
   const { name } = pokemon;
 
+  useEffect(() => {
+    const info = isPokemonInStorage(pokemon);
+    setIsFavourite(info);
+  }, [isPokemonInStorage, pokemon]);
+
   const handleFavourite = (actionType: boolean) => {
+    setAction(actionType);
     togglePokemonContext(pokemon, actionType);
-    setIsFavourite(actionType);
   };
 
   return (
@@ -61,7 +69,7 @@ export const SinglePokemon = (pokemon: Pokemon) => {
           <IconButton
             icon={isFavourite ? blackHeart : whiteHeart}
             size={20}
-            onPress={() => handleFavourite(!isFavourite)}
+            onPress={() => handleFavourite(!action)}
           />
           <Button
             height={10}
