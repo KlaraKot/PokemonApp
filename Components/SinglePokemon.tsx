@@ -33,10 +33,10 @@ export const SinglePokemon = (pokemon: Pokemon) => {
   useEffect(() => {
     const info = isPokemonInStorage(pokemon);
     setIsFavourite(info);
+    setAction(info);
   }, [isPokemonInStorage, pokemon]);
 
   const handleFavourite = (actionType: boolean) => {
-    setAction(actionType);
     togglePokemonContext(pokemon, actionType);
   };
 

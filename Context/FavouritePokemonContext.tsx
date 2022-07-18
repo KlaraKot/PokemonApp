@@ -44,11 +44,7 @@ export const PokemonProvider: React.FC = ({ children }) => {
       } else {
         const copyListOfFavouritesPokemons = listOfFavouritesPokemons;
         const newListOfFavouritesPokemons = copyListOfFavouritesPokemons.filter(
-          (pokemon) => {
-            if (pokemon.name !== favouritePokemon.name) {
-              return pokemon;
-            }
-          },
+          (pokemon) => pokemon.name !== favouritePokemon.name,
         );
 
         setListOfFavouritesPokemonsNames(newListOfFavouritesPokemons);
