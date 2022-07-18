@@ -9,9 +9,11 @@ interface Moves {
 }
 export const usePokemonMovesApi = (pokemon: Pokemon) => {
   const [listOfMoves, setListOfMoves] = useState<Array<Moves>>();
+  const [show, setShow] = useState<boolean>(false);
   // sciagamy dane z api
   useEffect(() => {
     const getPokemons = async () => {
+      setTimeout(() => setShow(true), 3000);
       const response = await fetch(
         `https://pokeapi.co/api/v2/pokemon/${pokemon.name}`,
       );
@@ -23,5 +25,6 @@ export const usePokemonMovesApi = (pokemon: Pokemon) => {
 
   return {
     pokemonMoves: listOfMoves,
+    showLottie: show,
   };
 };

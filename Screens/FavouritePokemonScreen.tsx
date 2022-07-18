@@ -7,6 +7,7 @@ import { RouteProp, useRoute } from "@react-navigation/native";
 import { ImageOfPokemon } from "../Components/ImageOfPokemon";
 import { usePokemonMovesApi } from "../Api/pokemonMovesApi";
 import { usePokemonAbilitiesApi } from "../Api/pokemonAbilitiesApi";
+import { LoadingImage } from "../Components/loadingImage";
 import Modal from "react-native-modal";
 
 type favouritePokemonProp = RouteProp<StackParamList, "FavouritePokemon">;
@@ -17,7 +18,9 @@ export const FavouritePokemon = () => {
   const { pokemonAbilities } = usePokemonAbilitiesApi(
     route.params.favouritePokemon,
   );
-  const { pokemonMoves } = usePokemonMovesApi(route.params.favouritePokemon);
+  const { pokemonMoves, showLottie } = usePokemonMovesApi(
+    route.params.favouritePokemon,
+  );
 
   const [isVisible, setVisible] = useState<boolean>(false);
 
@@ -61,13 +64,19 @@ export const FavouritePokemon = () => {
             borderRadius: 20,
           }}
         >
-          <ScrollView style={{ alignSelf: "center" }}>
-            {pokemonMoves?.map((ability) => (
-              <Text fontSize="xl" fontFamily="Cochin" key={ability.move.name}>
-                {ability.move.name}
-              </Text>
-            ))}
-          </ScrollView>
+          {showLottie ? (
+            <ScrollView style={{ alignSelf: "center" }}>
+              {pokemonMoves?.map((ability) => (
+                <Text fontSize="xl" fontFamily="Cochin" key={ability.move.name}>
+                  {ability.move.name}
+                </Text>
+              ))}
+            </ScrollView>
+          ) : (
+            <View>
+              <LoadingImage />
+            </View>
+          )}
         </View>
         <View style={{ marginTop: 50 }}>
           <Button onPress={toggleModal}>Click!</Button>
