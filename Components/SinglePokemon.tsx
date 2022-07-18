@@ -69,7 +69,9 @@ export const SinglePokemon = (pokemon: Pokemon) => {
             onPress={
               () =>
                 // eslint-disable-next-line implicit-arrow-linebreak
-                navigation.push("FavouritePokemon", { pokemon: name })
+                navigation.push("FavouritePokemon", {
+                  favouritePokemon: pokemon,
+                })
               // eslint-disable-next-line react/jsx-curly-newline
             }
           >
@@ -82,7 +84,7 @@ export const SinglePokemon = (pokemon: Pokemon) => {
             paddingTop: 10,
           }}
         >
-          <ImageOfPokemon name={name} />
+          <ImageOfPokemon name={name} isFullImage={false} />
         </View>
       </View>
     </View>
