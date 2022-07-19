@@ -10,7 +10,7 @@ export const ListOfFavouritePokemons = () => {
   return (
     <Box>
       <FlatList
-        data={listOfFavouritesPokemonsName}
+        data={listOfFavouritesPokemons}
         renderItem={({ item: { name } }) => <SinglePokemonItem name={name} />}
       />
     </Box>
