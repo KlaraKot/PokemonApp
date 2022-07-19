@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { MainScreen } from "../Screens/MainScreen";
 import { NativeBaseProvider } from "native-base";
-import { FavouritePokemon } from "../Screens/FavouritePokemonScreen";
+import { FavouritePokemon } from "../Screens/SinglePokemonScreen";
 
 const Stack = createStackNavigator();
 

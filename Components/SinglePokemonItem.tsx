@@ -18,7 +18,7 @@ type favouritePokemonProp = StackNavigationProp<
   "FavouritePokemon"
 >;
 
-export const SinglePokemon = (pokemon: Pokemon) => {
+export const SinglePokemonItem = (pokemon: Pokemon) => {
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
 
   // eslint-disable-next-line operator-linebreak

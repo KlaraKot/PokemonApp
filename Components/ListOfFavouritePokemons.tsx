@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "native-base";
 import { FlatList } from "react-native";
-import { SinglePokemon } from "./SinglePokemon";
+import { SinglePokemonItem } from "./SinglePokemonItem";
 import { PokemonContext } from "../Context/FavouritePokemonContext";
 
 export const ListOfFavouritePokemons = () => {
@@ -10,8 +10,8 @@ export const ListOfFavouritePokemons = () => {
   return (
     <Box>
       <FlatList
-        data={listOfFavouritesPokemons}
-        renderItem={({ item: { name } }) => <SinglePokemon name={name} />}
+        data={listOfFavouritesPokemonsName}
+        renderItem={({ item: { name } }) => <SinglePokemonItem name={name} />}
       />
     </Box>
   );
