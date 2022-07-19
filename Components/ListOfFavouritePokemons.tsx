@@ -5,12 +5,12 @@ import { SinglePokemon } from "./SinglePokemon";
 import { PokemonContext } from "../Context/FavouritePokemonContext";
 
 export const ListOfFavouritePokemons = () => {
-  const { listOfFavouritesPokemonsName } = React.useContext(PokemonContext);
+  const { listOfFavouritesPokemons } = React.useContext(PokemonContext);
 
   return (
     <Box>
       <FlatList
-        data={listOfFavouritesPokemonsName}
+        data={listOfFavouritesPokemons}
         renderItem={({ item: { name } }) => <SinglePokemon name={name} />}
       />
     </Box>
