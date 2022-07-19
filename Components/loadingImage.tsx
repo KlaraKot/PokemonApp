@@ -7,7 +7,7 @@ export const LoadingImage = () => {
     animation: {
       width: 300,
       height: 150,
-      aspectRatio: 0.5,
+      aspectRatio: 1,
     },
   });
   return (

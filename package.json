@@ -25,14 +25,6 @@
     "react-animated-heart": "^0.0.7",
     "react-dom": "17.0.2",
     "react-native": "^0.68.2",
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "react-native-gesture-handler": "^2.5.0",
-=======
->>>>>>> e3842ba (dodanie wyswietlania info o ruchach pokemona)
-=======
-    "react-native-gesture-handler": "^2.5.0",
->>>>>>> 171e551 (dodanie lottie na czas sciagania plikow)
     "react-native-modal": "^13.0.1",
     "react-native-paper": "^4.12.2",
     "react-native-safe-area-context": "4.2.4",
