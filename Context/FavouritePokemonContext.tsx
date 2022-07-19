@@ -13,12 +13,10 @@ const initialiValue: FavouritePokemonContextType = {
   isPokemonFavourite: () => false,
 };
 
-// eslint-disable-next-line operator-linebreak
 export const PokemonContext =
   React.createContext<FavouritePokemonContextType>(initialiValue);
 
 export const PokemonProvider: React.FC = ({ children }) => {
-  // eslint-disable-next-line operator-linebreak
   const [listOfFavouritesPokemons, setListOfFavouritesPokemonsNames] = useState<
     Array<Pokemon>
   >([]);
@@ -26,7 +24,6 @@ export const PokemonProvider: React.FC = ({ children }) => {
   const isPokemonFavourite = useCallback(
     (pokemonToCheck: Pokemon) => {
       const condition = (pokemon: Pokemon) =>
-        // eslint-disable-next-line implicit-arrow-linebreak
         pokemon.name === pokemonToCheck.name;
 
       return listOfFavouritesPokemons.some(condition);

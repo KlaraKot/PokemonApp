@@ -21,7 +21,6 @@ type favouritePokemonProp = StackNavigationProp<
 export const SinglePokemonItem = (pokemon: Pokemon) => {
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
 
-  // eslint-disable-next-line operator-linebreak
   const { togglePokemonFavourite, isPokemonFavourite } =
     React.useContext(PokemonContext);
 
@@ -72,13 +71,10 @@ export const SinglePokemonItem = (pokemon: Pokemon) => {
           <Button
             height={10}
             width={20}
-            onPress={
-              () =>
-                // eslint-disable-next-line implicit-arrow-linebreak
-                navigation.push("FavouritePokemon", {
-                  favouritePokemon: pokemon,
-                })
-              // eslint-disable-next-line react/jsx-curly-newline
+            onPress={() =>
+              navigation.push("FavouritePokemon", {
+                favouritePokemon: pokemon,
+              })
             }
           >
             Zobacz
