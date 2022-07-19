@@ -1,6 +1,6 @@
 import { FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
-import { SinglePokemon } from "./SinglePokemon";
+import { SinglePokemonItem } from "./SinglePokemonItem";
 import { Box } from "native-base";
 import type { Pokemon } from "../Types/pokemon";
 // import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -25,7 +25,7 @@ export const ListOfPokemons = () => {
       {/* <Button onPress={() => AsyncStorage.clear()} title="kliknij" /> */}
       <FlatList
         data={listOfPokemons}
-        renderItem={({ item: { name } }) => <SinglePokemon name={name} />}
+        renderItem={({ item: { name } }) => <SinglePokemonItem name={name} />}
       />
     </Box>
   );
