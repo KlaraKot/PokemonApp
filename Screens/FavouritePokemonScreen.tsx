@@ -7,7 +7,7 @@ import { RouteProp, useRoute } from "@react-navigation/native";
 import { ImageOfPokemon } from "../Components/ImageOfPokemon";
 import { usePokemonMovesApi } from "../Api/pokemonMovesApi";
 import { usePokemonAbilitiesApi } from "../Api/pokemonAbilitiesApi";
-import { LoadingImage } from "../Components/loadingImage";
+import { LoadingImage } from "../Components/LoadingImage";
 import Modal from "react-native-modal";
 
 type favouritePokemonProp = RouteProp<StackParamList, "FavouritePokemon">;
@@ -73,9 +73,7 @@ export const FavouritePokemon = () => {
               ))}
             </ScrollView>
           ) : (
-            <View>
-              <LoadingImage />
-            </View>
+            <LoadingImage />
           )}
         </View>
         <View style={{ marginTop: 50 }}>
