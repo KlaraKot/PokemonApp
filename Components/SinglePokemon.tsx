@@ -20,10 +20,9 @@ type favouritePokemonProp = StackNavigationProp<
 
 export const SinglePokemon = (pokemon: Pokemon) => {
   const [isFavourite, setIsFavourite] = useState<boolean>(false);
-  const [action, setAction] = useState<boolean>();
 
   // eslint-disable-next-line operator-linebreak
-  const { togglePokemonContext, isPokemonInStorage } =
+  const { togglePokemonFavourite, isPokemonFavourite } =
     React.useContext(PokemonContext);
 
   const navigation = useNavigation<favouritePokemonProp>();
@@ -31,13 +30,12 @@ export const SinglePokemon = (pokemon: Pokemon) => {
   const { name } = pokemon;
 
   useEffect(() => {
-    const info = isPokemonInStorage(pokemon);
+    const info = isPokemonFavourite(pokemon);
     setIsFavourite(info);
-    setAction(info);
-  }, [isPokemonInStorage, pokemon]);
+  }, [isPokemonFavourite, pokemon]);
 
-  const handleFavourite = (actionType: boolean) => {
-    togglePokemonContext(pokemon, actionType);
+  const handleFavourite = () => {
+    togglePokemonFavourite(pokemon);
   };
 
   return (
@@ -69,7 +67,7 @@ export const SinglePokemon = (pokemon: Pokemon) => {
           <IconButton
             icon={isFavourite ? blackHeart : whiteHeart}
             size={20}
-            onPress={() => handleFavourite(!action)}
+            onPress={() => handleFavourite()}
           />
           <Button
             height={10}

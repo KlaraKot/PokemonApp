@@ -5,7 +5,6 @@ export interface Pokemon {
 
 export type FavouritePokemonContextType = {
   listOfFavouritesPokemons: Array<Pokemon>;
-  getAllFavouritesPokemons: () => Pokemon[];
-  togglePokemonContext: (pokemon: Pokemon, actionType: boolean) => void;
-  isPokemonInStorage: (pokemon: Pokemon) => boolean;
+  togglePokemonFavourite: (pokemon: Pokemon) => void;
+  isPokemonFavourite: (pokemon: Pokemon) => boolean;
 };
