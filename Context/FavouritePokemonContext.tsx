@@ -13,7 +13,6 @@ const initialiValue: FavouritePokemonContextType = {
   isPokemonFavourite: () => false,
 };
 
-// eslint-disable-next-line operator-linebreak
 export const PokemonContext =
   React.createContext<FavouritePokemonContextType>(initialiValue);
 
@@ -73,6 +72,7 @@ export const PokemonProvider: React.FC = ({ children }) => {
     }),
     [listOfFavouritesPokemons, togglePokemonFavourite, isPokemonFavourite],
   );
+
   return (
     <PokemonContext.Provider value={foo}>{children}</PokemonContext.Provider>
   );
