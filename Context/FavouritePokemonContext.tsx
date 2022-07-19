@@ -8,31 +8,44 @@ const emptyPokemonObject = {
 };
 
 const initialiValue: FavouritePokemonContextType = {
-  listOfFavouritesPokemonsName: [],
-  getAllFavouritesPokemons: () => [],
-  togglePokemonContext: () => emptyPokemonObject,
+  listOfFavouritesPokemons: [],
+  togglePokemonFavourite: () => emptyPokemonObject,
+  isPokemonFavourite: () => false,
 };
 
-// eslint-disable-next-line operator-linebreak
 export const PokemonContext =
   React.createContext<FavouritePokemonContextType>(initialiValue);
 
 export const PokemonProvider: React.FC = ({ children }) => {
   // eslint-disable-next-line operator-linebreak
-  const [listOfFavouritesPokemonsName, setListOfFavouritesPokemonsNames] =
-    useState<Array<Pokemon>>([]);
+  const [listOfFavouritesPokemons, setListOfFavouritesPokemonsNames] = useState<
+    Array<Pokemon>
+  >([]);
 
-  const togglePokemonContext = useCallback(
-    (favouritePokemon: Pokemon, actionType: boolean) => {
+  const isPokemonFavourite = useCallback(
+    (pokemonToCheck: Pokemon) => {
+      const condition = (pokemon: Pokemon) =>
+        // eslint-disable-next-line implicit-arrow-linebreak
+        pokemon.name === pokemonToCheck.name;
+
+      return listOfFavouritesPokemons.some(condition);
+    },
+    [listOfFavouritesPokemons],
+  );
+
+  const togglePokemonFavourite = useCallback(
+    (favouritePokemon: Pokemon) => {
       // if pokemon already exists in the list
-      const foundPokemon = listOfFavouritesPokemonsName.find(
+      const foundPokemon = listOfFavouritesPokemons.find(
         (pokemon) => favouritePokemon.name === pokemon.name,
       );
       // actionType gives us information about action which will be proceeded
+      const actionType = !isPokemonFavourite(favouritePokemon);
+
       if (actionType === true) {
         if (foundPokemon === undefined) {
           setListOfFavouritesPokemonsNames([
-            ...listOfFavouritesPokemonsName,
+            ...listOfFavouritesPokemons,
             favouritePokemon,
           ]);
           storeFavouritePokemon(favouritePokemon.name);
@@ -40,31 +53,26 @@ export const PokemonProvider: React.FC = ({ children }) => {
           console.log("this pokemon already exists!");
         }
       } else {
-        listOfFavouritesPokemonsName.filter(
+        const copyListOfFavouritesPokemons = listOfFavouritesPokemons;
+        const newListOfFavouritesPokemons = copyListOfFavouritesPokemons.filter(
           (pokemon) => pokemon.name !== favouritePokemon.name,
         );
-        setListOfFavouritesPokemonsNames([...listOfFavouritesPokemonsName]);
+
+        setListOfFavouritesPokemonsNames(newListOfFavouritesPokemons);
       }
     },
-    [listOfFavouritesPokemonsName],
-  );
-  const getAllFavouritesPokemons = useCallback(
-    () => listOfFavouritesPokemonsName,
-    [listOfFavouritesPokemonsName],
+    [listOfFavouritesPokemons, isPokemonFavourite],
   );
 
-  const foo = useMemo(
+  const foo = useMemo<FavouritePokemonContextType>(
     () => ({
-      listOfFavouritesPokemonsName,
-      togglePokemonContext,
-      getAllFavouritesPokemons,
+      listOfFavouritesPokemons,
+      togglePokemonFavourite,
+      isPokemonFavourite,
     }),
-    [
-      listOfFavouritesPokemonsName,
-      togglePokemonContext,
-      getAllFavouritesPokemons,
-    ],
+    [listOfFavouritesPokemons, togglePokemonFavourite, isPokemonFavourite],
   );
+
   return (
     <PokemonContext.Provider value={foo}>{children}</PokemonContext.Provider>
   );
