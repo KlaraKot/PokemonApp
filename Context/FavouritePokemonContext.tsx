@@ -70,6 +70,7 @@ export const PokemonProvider: React.FC = ({ children }) => {
     }),
     [listOfFavouritesPokemons, togglePokemonFavourite, isPokemonFavourite],
   );
+
   return (
     <PokemonContext.Provider value={foo}>{children}</PokemonContext.Provider>
   );
