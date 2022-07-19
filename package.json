@@ -10,6 +10,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@expo/vector-icons": "^13.0.0",
     "@mdi/js": "^6.9.96",
     "@react-native-async-storage/async-storage": "^1.17.7",
     "@react-navigation/bottom-tabs": "^6.3.2",
@@ -24,6 +25,7 @@
     "react": "17.0.2",
     "react-animated-heart": "^0.0.7",
     "react-dom": "17.0.2",
+    "react-icons": "^4.4.0",
     "react-native": "^0.68.2",
     "react-native-modal": "^13.0.1",
     "react-native-paper": "^4.12.2",
